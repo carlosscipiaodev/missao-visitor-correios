@@ -3,7 +3,7 @@
 **Missão Visitor — Central de Encomendas**  
 Projeto educacional de Carlos Vinicius.
 
-[Jogar online](https://missao-visitor-correios.fabledpony9.chatgpt.site) · [Código Java completo](CentralPostal.java)
+[Jogar online](https://carlosscipiaodev.github.io/missao-visitor-correios/) · [Código Java completo](CentralPostal.java)
 
 ## O que é
 
@@ -263,7 +263,9 @@ O ponto central é separar os dados das encomendas das operações de frete, eti
 
 ## Acesso ao projeto
 
-- [Jogar online — Missão Visitor](https://missao-visitor-correios.fabledpony9.chatgpt.site)
+- [Código-fonte — carlosscipiaodev/missao-visitor-correios](https://github.com/carlosscipiaodev/missao-visitor-correios)
+
+- [Jogar online — Missão Visitor](https://carlosscipiaodev.github.io/missao-visitor-correios/)
 - [Consultar a implementação Java completa](CentralPostal.java)
 - Para jogar offline, baixe `index.html` e abra-o em um navegador. Os estilos, ilustrações e scripts estão incorporados ao HTML.
 - Para executar o exemplo Java 17 ou superior: `java CentralPostal.java`.
