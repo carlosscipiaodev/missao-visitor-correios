@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Monte pedidos, visite encomendas e descubra o padrão Visitor em um laboratório postal interativo.">
+<title>Missão Visitor · Central de Encomendas</title>
+<style>
+:root{--paper:#f7f6f1;--ink:#192c41;--muted:#647180;--blue:#325be5;--line:#dfe3e3;--yellow:#f5cd5f;--mint:#dceee5;--purple:#e9e1f7;--orange:#ec9065;--white:#fff;--mono:ui-monospace,SFMono-Regular,Consolas,monospace}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--paper);font:14px/1.5 'Segoe UI',Arial,sans-serif}button,select,input{font:inherit}button,a{touch-action:manipulation}button{cursor:pointer;color:inherit}button:disabled{cursor:wait;opacity:.5}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #db9a22;outline-offset:4px}button{border:0}a{color:inherit}svg{vertical-align:middle}h1,h2,h3,p{margin:0}button{transition:background .18s,transform .18s,box-shadow .18s}.wrap{max-width:1440px;padding:0 44px;margin:auto}header{height:92px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;text-decoration:none}.brandmark{display:grid;place-items:center;background:var(--blue);color:white;width:43px;height:43px;border-radius:13px;transform:rotate(-6deg)}.brand strong{font-size:20px;letter-spacing:-.7px}.brand small{display:block;font-size:9px;letter-spacing:2px;color:var(--muted);margin-top:1px}.nav{display:flex;align-items:center;gap:25px}.nav a,.nav button{font-size:12px;background:transparent;text-decoration:none}.nav .help{border:1px solid #ccd3d8;border-radius:7px;padding:9px 13px}.lab-tag{font:10px var(--mono);color:var(--muted);display:flex;align-items:center;gap:8px}.dot{width:6px;height:6px;background:#5c9c77;border-radius:50%;display:inline-block}.hero{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:65px;padding:47px 0 38px}.eyebrow{font:10px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}.eyebrow b{background:#e4e9fb;color:var(--blue);font-size:10px;padding:3px 7px;letter-spacing:.5px;border-radius:4px}h1{font-size:clamp(36px,3.65vw,57px);line-height:1.08;font-weight:750;letter-spacing:-2.5px;margin:17px 0 19px}h1 em{font-style:normal;color:var(--blue);position:relative}h1 em:after{content:'';display:block;position:absolute;left:0;bottom:-4px;width:100%;height:3px;background:var(--yellow);transform:rotate(-1deg)}.hero p{color:var(--muted);max-width:465px;font-size:14px;line-height:1.8}.hero p strong{color:var(--ink)}.hero-note{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted);margin-top:22px}.hero-note svg{color:var(--blue)}.ticket{background:#fff;border:1px solid #dce1e3;border-radius:13px;box-shadow:0 7px 0 -3px #eceeea;position:relative;overflow:hidden}.ticket:after{position:absolute;content:'';left:0;top:0;width:6px;height:100%;background:repeating-linear-gradient(-45deg,var(--blue) 0 13px,#fff 13px 26px,var(--orange) 26px 39px,#fff 39px 52px)}.ticket-top{display:flex;align-items:center;justify-content:space-between;padding:22px 25px 18px}.ticket h2{font-size:18px;letter-spacing:-.4px;margin-top:5px}.ticket-stamp{font:9px var(--mono);border:2px dashed #98afa2;color:#638273;border-radius:50%;padding:16px 7px;transform:rotate(13deg)}.mission-list{display:flex;padding:0 24px 22px;gap:7px}.mission{border-top:3px solid #e5e8eb;flex:1;padding-top:10px;font-size:10px;color:var(--muted)}.mission span{display:block;font:10px var(--mono);margin-bottom:3px}.mission.done{border-color:#4a8e6a;color:#347455}.ticket-bottom{background:#f7f9f8;border-top:1px dashed #d9dfdf;display:flex;justify-content:space-between;padding:11px 25px;font:10px var(--mono);color:var(--muted)}.labbar{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-top:1px solid var(--line)}.labbar h2{font-size:16px;letter-spacing:-.3px;display:flex;align-items:center;gap:9px}.labbar h2 span{font:10px var(--mono);background:#e9eced;padding:4px 7px;border-radius:4px}.labbar-right{display:flex;align-items:center;gap:18px;font-size:11px;color:var(--muted)}.textbtn{background:transparent;font-size:11px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}.workspace{display:grid;grid-template-columns:270px minmax(0,1fr) 290px;gap:17px;align-items:start}.panel{border:1px solid var(--line);background:#fff;border-radius:12px;overflow:hidden}.panel-head{padding:17px 18px;border-bottom:1px solid #edf0f0;display:flex;align-items:center;justify-content:space-between}.panel-head h3{font-size:13px;letter-spacing:-.1px}.panel-head small{font:10px var(--mono);color:var(--muted)}.catalog-intro{font-size:11px;color:var(--muted);padding:13px 16px 10px}.catalog{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 13px 14px}.product{position:relative;background:#fafbf9;border:1px solid #e6e9e7;border-radius:8px;padding:11px 8px 9px;text-align:left;min-height:114px}.product:hover{background:#edf2ff;border-color:#aebff5;transform:translateY(-2px)}.product .art{height:39px;display:flex;align-items:center;justify-content:center;margin-bottom:9px}.product strong{display:block;font-size:11px}.product small{display:block;font-size:9px;color:var(--muted);margin-top:2px}.add{position:absolute;top:7px;right:7px;width:17px;height:17px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid #e1e4e4;font-size:12px;color:var(--blue)}.product .origin{font-size:8px;letter-spacing:.4px;color:var(--blue);display:block;margin-top:5px}.catalog-foot{padding:11px 15px;background:#fafbf9;border-top:1px solid #edf0ed;font-size:10px;line-height:1.7;color:var(--muted)}.catalog-foot code{font-size:9px;color:#4b6181}.stage{min-width:0}.stage-header{display:flex;justify-content:space-between;align-items:center;background:#eff3fa;padding:13px 17px;border-bottom:1px solid #dce4ef}.stage-header strong{font-size:11px}.status{font:9px var(--mono);display:flex;align-items:center;gap:6px;color:#526c82}.status.running{color:var(--blue)}.status.running .dot{background:var(--blue);animation:pulse 1s infinite}.scene{height:255px;background:#eaf0f8;position:relative;overflow:hidden}.scene svg.landscape{width:100%;height:100%;position:absolute;inset:0}.cloud{animation:drift 8s ease-in-out infinite alternate}.scene-label{position:absolute;left:17px;top:14px;font:9px var(--mono);color:#7186a2;letter-spacing:.8px}.scene-note{position:absolute;bottom:12px;left:17px;right:17px;display:flex;justify-content:space-between;font:8px var(--mono);color:#6c8099}.parcel{position:absolute;left:9%;bottom:62px;width:49px;height:49px;background:#ddb37b;border:1.8px solid #9a774f;border-radius:3px;box-shadow:7px 7px 0 #b88b58;transform:rotate(-5deg);transition:left .55s ease-in-out,transform .4s;display:grid;place-items:center;z-index:2}.parcel:before{content:'';position:absolute;height:100%;width:11px;left:18px;top:0;background:#f4d5a6aa;border-left:1px solid #b68a52;border-right:1px solid #b68a52}.parcel svg{position:relative;max-width:31px;max-height:31px;filter:drop-shadow(0 1px 0 white)}.parcel.accept{left:38%;transform:rotate(0)}.parcel.visit{left:50%;transform:rotate(0) scale(1.06)}.parcel.result{left:82%;transform:rotate(5deg)}.scanlight{position:absolute;top:120px;left:48%;width:19%;height:66px;background:linear-gradient(90deg,transparent,#69a6ff30,transparent);border-left:2px solid #5d9af0;display:none;z-index:3;pointer-events:none}.scanning .scanlight{display:block;animation:scan .7s ease-in-out infinite alternate}.station-tag{position:absolute;top:89px;left:45%;background:#325be5;color:white;transform:rotate(-2deg);padding:3px 6px;border-radius:3px;font:8px var(--mono);z-index:4}.steptrack{display:flex;border-top:1px solid #dae2ee;background:#f4f7fb;padding:11px 15px;gap:6px}.steptrack span{flex:1;font:9px var(--mono);color:#718197;background:#e8edf4;padding:6px 4px;text-align:center;border-radius:4px}.steptrack .active{color:#214bcd;background:#dce5ff}.oparea{padding:15px 17px}.mini-label{font:9px var(--mono);letter-spacing:1px;color:var(--muted);display:block;margin-bottom:9px}.optabs{display:flex;gap:7px}.optabs button{flex:1;border:1px solid #e0e4e9;background:#fff;padding:9px 2px;font-size:11px;border-radius:6px;display:flex;align-items:center;justify-content:center;gap:5px}.optabs button[aria-pressed=true]{background:#edf1ff;border-color:#9fb2f2;color:#284fcd}.opdesc{font-size:10px;color:var(--muted);min-height:34px;margin:10px 0}.runbar{display:flex;align-items:center;gap:8px}.run{flex:1;background:var(--blue);color:#fff;border-radius:7px;padding:12px;font-weight:650;font-size:12px;box-shadow:0 3px 0 #2445b6}.run:hover{background:#284dc8;transform:translateY(-1px)}.speed{border:1px solid #dfe4ea;background:#fff;border-radius:6px;padding:10px 6px;font-size:10px;max-width:89px}.skip{display:none}.skip.visible{display:block;padding:8px 2px;margin:auto;font-size:10px;background:transparent;color:var(--blue);text-decoration:underline}.explanation{background:#f9f6ed;border-top:1px solid #ece6d7;padding:12px 17px;display:flex;align-items:flex-start;gap:9px;font-size:11px;line-height:1.65;min-height:71px}.explanation b{color:#926526}.order-count{background:#e9efff;color:var(--blue);font:10px var(--mono);border-radius:4px;padding:2px 7px}.destination{padding:13px 16px 10px}.destination label{font-size:10px;color:var(--muted);display:block;margin-bottom:5px}.destination select{border:1px solid var(--line);background:#f9faf9;border-radius:6px;width:100%;padding:8px;font-size:11px;color:var(--ink)}.cart{padding:0 15px;max-height:228px;overflow:auto}.cart-row{display:flex;gap:9px;align-items:center;padding:11px 0;border-bottom:1px solid #edf0ed}.cart-icon{width:32px;height:35px;background:#f4f5f0;border-radius:6px;display:grid;place-items:center;flex-shrink:0}.cart-title{flex:1;min-width:0}.cart-title strong{display:block;font-size:11px}.cart-title small{font-size:9px;color:var(--muted)}.qty{display:flex;align-items:center;gap:7px;font:10px var(--mono)}.qty button{background:#f2f4f5;border:1px solid #e3e6e7;border-radius:4px;width:22px;height:22px}.cart-empty{padding:25px 5px;text-align:center;color:var(--muted);font-size:11px}.order-stats{padding:12px 17px;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);border-bottom:1px dashed var(--line)}.order-stats b{color:var(--ink)}.manifest{padding:16px}.manifest-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}.manifest-title strong{font-size:11px}.manifest-title span{font:8px var(--mono);color:var(--muted)}.result-empty{border:1px dashed #d9dfe1;border-radius:7px;padding:20px 13px;text-align:center;color:var(--muted);font-size:11px;line-height:1.7}.receipt-line{display:flex;justify-content:space-between;gap:8px;font-size:10px;padding:6px 0;border-bottom:1px solid #edf0ed}.receipt-line small{color:var(--muted);font-size:9px}.receipt-total{display:flex;justify-content:space-between;align-items:center;padding:14px 0 9px;font-size:11px}.receipt-total strong{font-size:24px;letter-spacing:-1px;color:var(--blue)}.fineprint{font-size:9px;color:var(--muted);line-height:1.6}.download{border:1px solid #d6dfe6;border-radius:5px;background:#f8fafb;font-size:10px;padding:7px 10px;width:100%;margin-top:10px}.label-ticket{border:1px solid #ccd5dd;padding:11px;margin-bottom:9px;font-size:9px;border-radius:4px;background:#fff}.label-ticket strong{font-size:11px;display:block}.label-ticket .barcode{height:24px;background:repeating-linear-gradient(90deg,#192c41 0 2px,#fff 2px 4px,#192c41 4px 5px,#fff 5px 8px,#192c41 8px 11px,#fff 11px 13px);margin-top:8px}.label-ticket .label-code{font:8px var(--mono);margin-top:4px}.result-chip{display:inline-block;font:8px var(--mono);background:#e8f2eb;color:#407453;padding:3px 5px;border-radius:3px;margin-top:4px}.code-section{margin-top:22px;border:1px solid #dce1e5;border-radius:12px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);background:#fff}.code-left{background:#1c2c40;color:#dde6f3;min-width:0}.code-top{display:flex;justify-content:space-between;align-items:center;padding:13px 19px;border-bottom:1px solid #ffffff14;font:10px var(--mono);color:#b5c5db}.code-top .code-dot{width:7px;height:7px;border-radius:50%;background:#f1c75f;display:inline-block;margin-right:7px}.code-top button{background:#ffffff0c;border:1px solid #ffffff24;border-radius:4px;color:#c6d7f1;font:9px var(--mono);padding:4px 7px}pre{margin:0;overflow:auto;padding:19px;font:11px/1.9 var(--mono);tab-size:2}.code-line{display:block;border-left:2px solid transparent;padding-left:10px;white-space:pre}.code-line.highlight{background:#3c5e8c66;border-left-color:#f2ca62}.kw{color:#abacfa}.fn{color:#f1ce85}.cm{color:#8294ac}.code-explain{padding:22px 23px}.code-explain .eyebrow{font-size:9px}.code-explain h3{font-size:20px;letter-spacing:-.6px;margin:9px 0 10px}.code-explain p{font-size:12px;line-height:1.85;color:var(--muted)}.dispatch{display:flex;align-items:center;gap:6px;font:9px var(--mono);margin:18px 0;flex-wrap:wrap}.dispatch span{background:#edf1fc;border:1px solid #dfe6f4;border-radius:5px;padding:6px;color:#365790}.code-explain .tip{font-size:10px;background:#f6f7f3;padding:10px 12px;border-left:2px solid var(--yellow);color:#61706c}.learn-section{padding:35px 0 30px}.learn-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:17px}.learn-head h2{font-size:24px;letter-spacing:-.8px}.learn-head p{font-size:12px;color:var(--muted);margin-top:6px}.comparison-tabs{display:flex;background:#e9ecec;padding:4px;border-radius:7px;gap:3px}.comparison-tabs button{padding:7px 12px;background:transparent;border-radius:5px;font-size:11px}.comparison-tabs button[aria-pressed=true]{background:#fff;box-shadow:0 1px 3px #23364b15}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:17px}.compare-card{padding:23px;border-radius:10px;border:1px solid #e0e3e2;background:#fff}.compare-card.accent{background:#edf1fd;border-color:#d4ddf6}.compare-card .tag{font:9px var(--mono);letter-spacing:1px;color:var(--muted)}.compare-card h3{font-size:17px;letter-spacing:-.4px;margin:9px 0}.compare-card p{font-size:12px;color:var(--muted);line-height:1.8}.compare-card pre{font-size:10px;background:#f4f5f4;border:1px solid #e1e5e6;border-radius:6px;padding:11px 13px;margin:13px 0;color:#3b4d65;white-space:pre-wrap}.compare-card.accent pre{background:#fff9;border-color:#d5dff7}.tradeoff{font-size:10px;color:#5b6a77;margin-top:11px}.footer{border-top:1px solid var(--line);padding:22px 0;display:flex;justify-content:space-between;gap:20px;font:9px/1.7 var(--mono);color:var(--muted)}.footer b{color:var(--ink)}.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,20px);opacity:0;background:var(--ink);color:#fff;border-radius:9px;padding:12px 22px;z-index:100;pointer-events:none;transition:.3s;font-size:12px;box-shadow:0 5px 30px #142b4033;max-width:90vw}.toast.show{opacity:1;transform:translate(-50%,0)}dialog{border:1px solid var(--line);border-radius:16px;padding:30px;max-width:570px;width:calc(100% - 40px);color:var(--ink);box-shadow:0 25px 100px #152c4555}dialog::backdrop{background:#142b4080;backdrop-filter:blur(4px)}dialog h2{font-size:24px;letter-spacing:-.8px;margin:10px 0 18px}dialog p{color:var(--muted);font-size:13px;line-height:1.9;margin:10px 0}dialog ol{padding-left:20px;line-height:1.9;font-size:13px}dialog .close{display:block;margin:20px 0 0 auto;background:var(--blue);color:#fff;padding:10px 19px;border-radius:6px}.no-motion{position:absolute;left:-10000px}.sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0)}@keyframes pulse{50%{opacity:.3}}@keyframes drift{to{transform:translateX(16px)}}@keyframes scan{to{transform:translateX(30px);opacity:.3}}@keyframes pop{0%{transform:scale(.94);opacity:.6}100%{transform:scale(1);opacity:1}}.pop{animation:pop .35s ease-out}.hidden{display:none!important}@media(min-width:1500px){.wrap{max-width:1500px}.workspace{grid-template-columns:285px minmax(0,1fr) 305px}.scene{height:285px}}@media(max-width:1150px){.wrap{padding:0 25px}.workspace{grid-template-columns:230px minmax(0,1fr) 255px;gap:12px}.hero{gap:30px}.mission-list{padding:0 20px 20px}.oparea{padding:13px}.optabs button{font-size:10px}.cart{padding:0 10px}.cart-row{gap:6px}.cart-icon{display:none}.scene{height:235px}.code-explain{padding:20px}h1{letter-spacing:-1.8px}}@media(max-width:920px){.workspace{grid-template-columns:220px minmax(0,1fr)}.order{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}.order .panel-head{grid-column:1/-1}.order .destination{grid-column:1}.order .cart{grid-column:1;max-height:190px}.order .order-stats{grid-column:1}.order .manifest{grid-column:2;grid-row:2/5;border-left:1px solid var(--line)}.hero{grid-template-columns:1fr 1fr;gap:25px}h1{font-size:39px}.nav .lab-tag{display:none}.ticket-top{padding:17px 20px}.ticket-stamp{padding:13px 5px;font-size:8px}.mission{font-size:9px}.hero-note{font-size:10px}.code-section{grid-template-columns:1.3fr 1fr}.code-explain h3{font-size:17px}.code-explain p{font-size:11px}}@media(max-width:650px){.wrap{padding:0 17px}header{height:76px}.brand strong{font-size:17px}.brand small{font-size:7px;letter-spacing:1.5px}.brandmark{width:35px;height:35px}.nav{gap:12px}.nav a{display:none}.hero{grid-template-columns:1fr;padding:30px 0 27px;gap:25px}h1{font-size:44px;letter-spacing:-2px}.hero p{font-size:13px}.hero-note{margin-top:16px}.ticket-top{padding:15px 20px 12px}.ticket-stamp{padding:11px 5px}.mission-list{padding-bottom:15px}.labbar-right span{display:none}.labbar h2{font-size:14px}.workspace{display:flex;flex-direction:column;gap:14px}.workspace>.panel{width:100%}.catalog-panel .panel-head{padding:14px 16px}.catalog{grid-template-columns:repeat(4,1fr);gap:7px}.product{min-height:109px;padding:9px 6px}.product .art{height:31px}.product .art svg{max-height:31px}.product strong{font-size:10px}.product small{font-size:8px}.product .origin{font-size:7px}.catalog-foot{font-size:9px}.stage{order:2}.order{order:1;display:block}.order .cart-icon{display:grid}.order .manifest{border-left:0;border-top:1px solid var(--line)}.cart{max-height:180px}.scene{height:260px}.opdesc{min-height:0}.stage-header{padding:14px 17px}.code-section{display:flex;flex-direction:column;margin-top:17px}.code-explain{padding:21px}.code-explain h3{font-size:22px}.code-explain p{font-size:12px}pre{font-size:10px;padding:15px 9px}.learn-head{align-items:flex-start;gap:17px;flex-direction:column}.learn-head h2{font-size:22px}.comparison{grid-template-columns:1fr}.compare-card{padding:20px}.footer{flex-direction:column;gap:8px}.run{padding:13px}.optabs button{font-size:12px}.labbar-right{gap:5px}.ticket h2{font-size:17px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}@media print{body *{visibility:hidden}#manifest,#manifest *{visibility:visible}#manifest{position:absolute;top:0;left:0;width:100%;padding:20px}.download{display:none}.label-ticket{break-inside:avoid;max-width:360px}.barcode{print-color-adjust:exact}}
+</style></head>
+<body>
+<a href="#laboratorio" class="sr">Pular para o laboratório</a>
+<div class="wrap"><header><a href="#" class="brand"><span class="brandmark"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m3 7 9-5 9 5v10l-9 5-9-5V7Zm0 0 9 5 9-5M12 12v10M7 4.7l9 5"/></svg></span><span><strong>missão visitor<span style="color:var(--blue)">.</span></strong><small>CENTRAL DE ENCOMENDAS</small></span></a><nav class="nav"><span class="lab-tag"><i class="dot"></i> UM PADRÃO, VÁRIOS DESTINOS</span><a href="#por-dentro">Por dentro do código</a><button class="help" id="help">Como jogar ↗</button></nav></header>
+<main><section class="hero"><div><div class="eyebrow"><b>DESIGN PATTERNS</b> LABORATÓRIO 01 / JAVA</div><h1>Cada encomenda.<br>Uma nova <em>missão.</em></h1><p>Monte seu pedido e assuma o controle de uma central postal. Calcule fretes, gere etiquetas e descubra o <strong>padrão Visitor</strong> na prática.</p><div class="hero-note"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m4 12 5 5L20 6M4 5h6M4 21h16"/></svg>A mesma encomenda. Três visitantes. Nenhuma mudança no objeto.</div></div><aside class="ticket"><div class="ticket-top"><div><div class="eyebrow">SEU CARTÃO DE MISSÕES</div><h2>Do pedido à expedição.</h2></div><div class="ticket-stamp">VISITOR<br>POSTAL LAB</div></div><div class="mission-list"><div class="mission" id="m-build"><span>01 / MONTAR</span>2 tipos de objeto</div><div class="mission" id="m-frete"><span>02 / CALCULAR</span>Visitar com frete</div><div class="mission" id="m-etiqueta"><span>03 / ETIQUETAR</span>Identificar volumes</div><div class="mission" id="m-relatorio"><span>04 / RELATAR</span>Conferir o pedido</div></div><div class="ticket-bottom"><span id="missionProgress">0 DE 4 MISSÕES</span><span id="missionEnd">DESTINO: ENTENDER O PADRÃO ↗</span></div></aside></section>
+<section id="laboratorio" aria-labelledby="labtitle"><div class="labbar"><h2 id="labtitle"><span>01</span> Sua central de operações</h2><div class="labbar-right"><span>Escolha. Envie. Veja acontecer.</span><button id="reset" class="textbtn">↻ Reiniciar</button></div></div><div class="workspace">
+<aside class="panel catalog-panel"><div class="panel-head"><h3>Monte seu pedido</h3><small>ELEMENTOS</small></div><p class="catalog-intro">Clique para adicionar um produto.</p><div class="catalog" id="catalog"></div><div class="catalog-foot">Cada unidade é um volume.<br>3 tipos de elemento: <code>Documento</code>, <code>Pacote</code> e <code>Fragil</code>.</div></aside>
+<section class="panel stage" aria-label="Simulador postal"><div class="stage-header"><strong>Central de triagem</strong><span class="status" id="stageStatus"><i class="dot"></i> AGUARDANDO VISITANTE</span></div><div class="scene" id="scene"><span class="scene-label">FORTALEZA / CENTRAL 001</span>
+<svg class="landscape" viewBox="0 0 600 270" preserveAspectRatio="xMidYMid slice" aria-label="Ilustração de uma central postal com esteira, scanner e caminhão" role="img"><defs><pattern id="belt" width="20" height="10" patternUnits="userSpaceOnUse" patternTransform="skewX(-15)"><rect width="20" height="10" fill="#354b67"/><rect x="1" width="2" height="10" fill="#617792"/></pattern><pattern id="ground" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#d3ddeb"/></pattern></defs>
+<path fill="#e2eaf5" d="M0 105h50V79h21v26h32V63h24v42h25V86h33v19h267V67h30v38h24V87h38v18h56v165H0z"/><path fill="#d7e3f1" d="M0 184 165 151l272-3 163 25v97H0z"/><path fill="url(#ground)" d="M0 184 165 151l272-3 163 25v97H0z"/><g class="cloud" fill="#fff" opacity=".8"><path d="M84 52c-4-17 21-24 26-10 12-9 28 1 25 10h10v5H75v-5z"/><path d="M432 37c0-13 17-18 23-8 11-6 22 0 22 8h10v4h-64v-4z"/></g>
+<g stroke="#8ca6c1" stroke-width="1.2"><path d="M64 159V94l83-30 79 28v64z" fill="#c8d7e9"/><path d="m64 94 82 25 80-27-79-28z" fill="#e7eef8"/><path d="M146 119v50l80-13V92z" fill="#aebfd7"/><path d="M81 111v37l45 13v-37z" fill="#90a7c3"/><path d="m84 115 39 12v29l-39-10z" fill="#bdcee2"/><path d="m81 100 45 14v8l-45-14z" fill="#f1cb6c"/></g><text x="91" y="103" font-size="8" font-family="monospace" fill="#56708c" transform="rotate(17 91 103)">EXPEDIÇÃO</text>
+<g><path d="M48 190 457 170l85 27-411 24z" fill="#aec0d6"/><path d="M50 178 457 158l85 27-411 24z" fill="url(#belt)" stroke="#6b819d" stroke-width="2"/><path d="m50 178 81 25 411-18v10l-411 23-81-28z" fill="#8095ae"/><path d="M116 215v20m368-38v20" stroke="#6f829b" stroke-width="6"/><path d="M126 205 529 183" stroke="#c4d0e0" stroke-width="2" stroke-dasharray="6 10"/></g>
+<g><path d="M284 178v-62l61-3 33 12v61l-14 1v-55l-64 3v47z" fill="#4970c2" stroke="#31569e" stroke-width="1.5"/><path d="m284 116 33 12 61-3-33-12z" fill="#7594d7"/><path d="M317 128v57" stroke="#a8bff0" stroke-width="4"/><rect x="290" y="143" width="10" height="18" rx="2" fill="#a8d4d7"/><circle cx="295" cy="148" r="2" fill="#eaf4ae"/></g>
+<g transform="translate(440 111)"><path d="m0 14 54-7 27 9-54 10z" fill="#fff8d2" stroke="#c7a04e"/><path d="M0 14v45l27 12V26z" fill="#f1c458" stroke="#c7a04e"/><path d="m27 26 54-10v43L27 71z" fill="#e4ad3d" stroke="#c7a04e"/><path d="m54 16 22 9v30l-22 6z" fill="#6385b1" stroke="#4f6b8c"/><path d="m57 23 15 5v15l-15-5z" fill="#c6e3f0"/><path d="m81 35 12 5v20l-12-1z" fill="#efc453" stroke="#bc9543"/><ellipse cx="36" cy="66" rx="7" ry="10" fill="#263d58"/><ellipse cx="36" cy="66" rx="3" ry="5" fill="#96a8bb"/><ellipse cx="83" cy="60" rx="7" ry="10" fill="#263d58"/><ellipse cx="83" cy="60" rx="3" ry="5" fill="#96a8bb"/><path d="m7 36 14 5v10L7 46z" fill="#fff3c6"/></g>
+<g fill="#82a89d" stroke="#668e83"><path d="M30 172v-27m-5 20c-15-10-10-25-3-16m13 12c13-17 7-25 1-16" stroke-width="3" fill="none"/><path d="m18 172 24 1-4 14H23z" fill="#e9bca0" stroke="#b69683"/></g><path d="m221 239 13-3m6-1 13-3m6-1 13-3" stroke="#b5c6d9" stroke-width="2"/>
+</svg><span class="station-tag" id="stationTag">FreteVisitor</span><div class="parcel" id="parcel" aria-hidden="true"></div><div class="scanlight"></div><div class="scene-note"><span>ELEMENT.accept(visitor)</span><span>VISITOR → RESULTADO</span></div></div>
+<div class="steptrack"><span id="step0">① accept(visitor)</span><span id="step1">② visitTipo(this)</span><span id="step2">③ resultado</span></div><div class="oparea"><span class="mini-label">QUAL VISITANTE VAI ENTRAR EM AÇÃO?</span><div class="optabs" id="optabs"><button data-op="frete" aria-pressed="true">↗ Frete</button><button data-op="etiqueta" aria-pressed="false">▤ Etiqueta</button><button data-op="relatorio" aria-pressed="false">▥ Relatório</button></div><p class="opdesc" id="opdesc"></p><div class="runbar"><button class="run" id="run">Calcular frete <span aria-hidden="true">→</span></button><label class="sr" for="speed">Velocidade da animação</label><select class="speed" id="speed"><option value="450">Animado</option><option value="120">Rápido</option></select></div><button id="skip" class="skip">Pular animação e ver resultado</button></div><div class="explanation" id="explanation"><span>✦</span><div><b>O pedido já chegou.</b> Adicione produtos ou execute o exemplo. A mesma lista poderá receber três visitantes diferentes.</div></div></section>
+<aside class="panel order"><div class="panel-head"><h3>Seu pedido <span class="order-count" id="orderCount">02</span></h3><small id="orderId">#MV-001</small></div><div class="destination"><label for="destination">Destino de todas as encomendas</label><select id="destination"><option value="fortaleza">Fortaleza, Brasil</option><option value="saopaulo">São Paulo, Brasil</option><option value="recife">Recife, Brasil</option><option value="lisboa">Lisboa, Portugal</option><option value="toquio">Tóquio, Japão</option></select></div><div class="cart" id="cart"></div><div class="order-stats"><span>Peso total <b id="weight">0 kg</b></span><span id="routeCount">0 rotas</span></div><div class="manifest" id="manifest"><div class="manifest-title"><strong id="resultTitle">Comprovante da operação</strong><span id="resultType">SAÍDA DO VISITOR</span></div><div id="result"><div class="result-empty">O resultado aparece aqui.<br>Escolha um visitante e execute a operação.</div></div></div></aside>
+</div></section>
+<section class="code-section" id="por-dentro" aria-label="Código Java e explicação"><div class="code-left"><div class="code-top"><span><i class="code-dot"></i> CentralPostal.java <span style="opacity:.5">/ JAVA 17+</span></span><button id="downloadJava">↓ Código completo</button></div><pre id="code"></pre></div><div class="code-explain"><div class="eyebrow">O QUE ACONTECE NOS BASTIDORES</div><h3 id="codeTitle">Uma visita, dois despachos.</h3><p id="codeText">O pedido guarda diferentes tipos de <strong>Encomenda</strong>. Primeiro, Java escolhe o <code>accept()</code> do objeto concreto. Esse método chama o <code>visitTipo(this)</code>; a implementação vem do visitante recebido.</p><div class="dispatch"><span>Encomenda</span> → <span>accept(visitor)</span> → <span>visitTipo(this)</span></div><div class="tip" id="codeTip">Double Dispatch: o comportamento depende do <strong>tipo da encomenda</strong> e do <strong>tipo do visitante</strong>.</div></div></section>
+<section class="learn-section"><div class="learn-head"><div><div class="eyebrow" style="margin-bottom:7px">O MESMO PROBLEMA, OUTRAS ESCOLHAS</div><h2>Entenda o que muda.</h2><p>Adicionar uma operação é diferente de trocar um algoritmo.</p></div><div class="comparison-tabs"><button data-compare="traditional" aria-pressed="true">Tradicional × Visitor</button><button data-compare="strategy" aria-pressed="false">Visitor × Strategy</button></div></div><div class="comparison" id="comparison"></div></section>
+</main><footer class="footer"><span><b>MISSÃO VISITOR</b> · FEITO PARA APRENDER, VOLUME POR VOLUME.<br><a href="index.html" download="Missao_Visitor.html">↓ Baixar jogo completo para usar offline</a></span><span>SIMULAÇÃO EDUCACIONAL · SEM VÍNCULO COM OS CORREIOS<br>FRETES E ETIQUETAS FICTÍCIOS · SEM POSTAGEM REAL</span></footer></div>
+<div id="toast" class="toast" role="status"></div><div id="announcer" class="sr" aria-live="polite"></div>
+<dialog id="helpDialog"><div class="eyebrow">BEM-VINDO À CENTRAL</div><h2>Sua missão é aprender fazendo.</h2><ol><li><strong>Monte o pedido.</strong> Adicione documentos, pacotes e itens frágeis. Você pode misturar produtos de diferentes países.</li><li><strong>Escolha o destino.</strong> A rota de cada volume depende de sua origem e do país de entrega.</li><li><strong>Receba um visitante.</strong> Calcule frete, gere etiquetas ou emita o relatório. Acompanhe <code>accept()</code> e <code>visitTipo()</code> na esteira.</li><li><strong>Troque a operação.</strong> Execute outro visitante no mesmo pedido e complete seu cartão de missões.</li></ol><p>Os produtos começam em suas origens indicadas. Cada unidade viaja como um volume separado; o frete total soma os volumes, sem consolidação. Tarifas e prazos são inventados para a aula.</p><p><strong>Por que Visitor?</strong> Novas operações ficam em novos visitantes. Adicionar um novo tipo de encomenda exige atualizar a interface e os visitantes existentes.</p><button class="close" id="closeHelp">Vamos começar →</button></dialog>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n);
+const kg=n=>new Intl.NumberFormat('pt-BR',{maximumFractionDigits:2}).format(n)+' kg';
+const svg=(inner,w=48)=>`<svg width="${w}" height="42" viewBox="0 0 64 52" fill="none" stroke="#344b62" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
+const art={
+ livro:svg('<path d="M13 12 41 6l11 7v32l-28 4-11-7z" fill="#9cafdb"/><path d="m13 12 11 7 28-6M24 19v30"/><path d="m28 22 19-4v22l-19 3z" fill="#e5e9f1"/><path d="m31 27 12-3m-12 8 9-2"/>'),
+ camiseta:svg('<path d="m22 7-15 9 7 12 8-5v25h25V23l7 5 7-12-16-9c-4 9-19 9-23 0z" fill="#c1dccc"/><path d="M22 7c3 16 20 16 23 0M27 38h14"/>'),
+ documento:svg('<path d="M10 13h46v31H10z" fill="#f8e9bc"/><path d="m10 13 23 18 23-18M10 44l16-15m30 15L40 29"/><path d="M13 9h39v9L33 32 13 17z" fill="#fffdf6"/><path d="M20 13h23m-23 5h16"/>'),
+ caneca:svg('<path d="M15 12h30v29c0 10-30 10-30 0z" fill="#e6b49a"/><path d="M45 17h7c13 0 13 22 0 22h-7m0-16h6c5 0 5 10 0 10h-6" fill="#e6b49a"/><ellipse cx="30" cy="12" rx="15" ry="5" fill="#fbf0e4"/><path d="m26 24 4 7 5-7m-5 7v7"/>'),
+ fone:svg('<path d="M14 29V22c0-25 36-25 36 0v7h-6V22c0-17-24-17-24 0v7z" fill="#a8b5cf"/><rect x="10" y="25" width="13" height="21" rx="5" fill="#4f668f"/><rect x="41" y="25" width="13" height="21" rx="5" fill="#4f668f"/><path d="M15 31v9m31-9v9" stroke="#c8d4e8"/>'),
+ camera:svg('<path d="M7 18h50v29H7z" fill="#a5bac8"/><path d="m19 18 4-9h19l4 9" fill="#b7c7d0"/><circle cx="33" cy="32" r="11" fill="#566d89"/><circle cx="33" cy="32" r="6" fill="#c4dfde"/><path d="M11 22h8m29 0h5" stroke="#edf4f2"/>'),
+ vaso:svg('<path d="M25 9h15v9c-1 6 15 9 13 22-2 14-39 14-40 0-1-12 13-16 12-22z" fill="#c5b5db"/><ellipse cx="32.5" cy="9" rx="7.5" ry="3" fill="#e9e1f2"/><path d="M17 35h32m-30 7h28" stroke="#ece3f4"/>'),
+ tenis:svg('<path d="m14 13 13 5 2 12 18 5c14-2 13 11 5 12H10V31z" fill="#f4d58a"/><path d="M10 39h45M28 25l7 3m-3 2 7 3"/><path d="m14 13 4 13-8 5" fill="#fff9ea"/>')};
+const products=[{id:'livro',name:'Livro',type:'Pacote',weight:.6,country:'BR',origin:'São Paulo · BR'},{id:'camiseta',name:'Camiseta',type:'Pacote',weight:.25,country:'BR',origin:'Recife · BR'},{id:'documento',name:'Documentos',type:'Documento',weight:.05,country:'BR',origin:'Fortaleza · BR'},{id:'caneca',name:'Caneca',type:'Fragil',weight:.4,country:'BR',origin:'Curitiba · BR'},{id:'fone',name:'Headphone',type:'Pacote',weight:.35,country:'US',origin:'Miami · EUA'},{id:'camera',name:'Câmera',type:'Fragil',weight:.8,country:'JP',origin:'Tóquio · JP'},{id:'vaso',name:'Vaso',type:'Fragil',weight:1.2,country:'PT',origin:'Lisboa · PT'},{id:'tenis',name:'Tênis',type:'Pacote',weight:.9,country:'US',origin:'Miami · EUA'}];
+const destinations={fortaleza:{city:'Fortaleza',country:'BR',factor:1},saopaulo:{city:'São Paulo',country:'BR',factor:1.15},recife:{city:'Recife',country:'BR',factor:.9},lisboa:{city:'Lisboa',country:'PT',factor:1.1},toquio:{city:'Tóquio',country:'JP',factor:1.25}};
+const opInfo={frete:{name:'FreteVisitor',label:'Calcular frete',title:'Frete do pedido',desc:'Cada tipo tem sua regra. O visitante soma o frete de todos os volumes.'},etiqueta:{name:'EtiquetaVisitor',label:'Gerar etiquetas',title:'Etiquetas geradas',desc:'Um visitante identifica cada volume e aplica os cuidados do seu tipo.'},relatorio:{name:'RelatorioVisitor',label:'Gerar relatório',title:'Relatório do pedido',desc:'O visitante percorre a mesma lista e cria um manifesto de expedição.'}};
+let cart={livro:1,caneca:1},op='frete',running=false,skip=false,revision=0,runToken=0;
+let completed=new Set(),outputs={},lastRows=[],toastTimer;
+// Elementos concretos: o despacho para o método do visitante ocorre em accept().
+class Encomenda {constructor(product,serial){Object.assign(this,product);this.serial=serial} get internacional(){return this.country!==destinations[$('destination').value].country}}
+class Documento extends Encomenda {accept(v){return v.visitDocumento(this)}}
+class Pacote extends Encomenda {accept(v){return v.visitPacote(this)}}
+class Fragil extends Encomenda {accept(v){return v.visitFragil(this)}}
+const elementClasses={Documento,Pacote,Fragil};
+class FreteVisitor {
+ route(e,base,perKg,care=0){let dest=destinations[$('destination').value];let raw=(base+e.weight*perKg+care)*dest.factor+(e.internacional?65:0);return {cost:Math.round(raw*100)/100,days:e.internacional?'12–20 dias úteis':'3–7 dias úteis',formula:`(${base} + ${e.weight} × ${perKg}${care?' + '+care:''}) × ${dest.factor}${e.internacional?' + 65':''}`}}
+ visitDocumento(e){return this.route(e,8,2)}
+ visitPacote(e){return this.route(e,14,6)}
+ visitFragil(e){return this.route(e,18,8,9)}
+}
+class EtiquetaVisitor {
+ make(e,care){return {code:`MV-001-${String(e.serial).padStart(3,'0')}`,care,route:e.internacional?'INTERNACIONAL':'NACIONAL',destination:destinations[$('destination').value].city}}
+ visitDocumento(e){return this.make(e,'NÃO DOBRAR')}
+ visitPacote(e){return this.make(e,'VOLUME PADRÃO')}
+ visitFragil(e){return this.make(e,'FRÁGIL · MANUSEAR COM CUIDADO')}
+}
+class RelatorioVisitor {
+ make(e,handling){return {name:e.name,type:e.type,weight:e.weight,origin:e.origin,route:e.internacional?'Internacional':'Nacional',handling}}
+ visitDocumento(e){return this.make(e,'Envelope rígido')}
+ visitPacote(e){return this.make(e,'Embalagem padrão')}
+ visitFragil(e){return this.make(e,'Proteção reforçada')}
+}
+const visitors={frete:FreteVisitor,etiqueta:EtiquetaVisitor,relatorio:RelatorioVisitor};
+function volumes(){let list=[];for(const p of products)for(let i=0;i<(cart[p.id]||0);i++)list.push(new elementClasses[p.type](p,list.length+1));return list}
+function toast(s){$('toast').textContent=s;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),3300)}
+function missions(){let n=0;for(const key of ['build','frete','etiqueta','relatorio']){const done=completed.has(key);$('m-'+key).classList.toggle('done',done);if(done)n++}$('missionProgress').textContent=`${n} DE 4 MISSÕES`;$('missionEnd').textContent=n===4?'MISSÃO CUMPRIDA ✓':'DESTINO: ENTENDER O PADRÃO ↗'}
+function invalidate(){revision++;completed.clear();outputs={};lastRows=[];const list=volumes();if(new Set(list.map(e=>e.type)).size>=2)completed.add('build');missions();showResult();updateCode();$('stageStatus').innerHTML='<i class="dot"></i> AGUARDANDO VISITANTE';for(let j=0;j<3;j++)$('step'+j).classList.remove('active');$('announcer').textContent='';$('parcel').className='parcel';$('explanation').innerHTML='<span>✦</span><div><b>Pedido atualizado.</b> Execute os visitantes novamente: os comprovantes precisam refletir os volumes e o destino atuais.</div>'}
+function renderCart(){let list=volumes();$('cart').innerHTML=products.filter(p=>cart[p.id]).map(p=>`<div class="cart-row"><span class="cart-icon">${art[p.id].replace('width="48"','width="25"')}</span><div class="cart-title"><strong>${p.name}</strong><small>${p.origin} · ${kg(p.weight)}</small></div><div class="qty"><button data-remove="${p.id}" aria-label="Remover uma unidade de ${p.name}" ${running?'disabled':''}>−</button><span>${cart[p.id]}</span><button data-add="${p.id}" aria-label="Adicionar uma unidade de ${p.name}" ${running?'disabled':''}>+</button></div></div>`).join('')||'<p class="cart-empty">Seu pedido está vazio.<br>Adicione um produto no catálogo.</p>';$('orderCount').textContent=String(list.length).padStart(2,'0');$('weight').textContent=kg(list.reduce((s,e)=>s+e.weight,0));let intl=list.filter(e=>e.internacional).length;$('routeCount').textContent=`${list.length-intl} nacional · ${intl} internac.`;$('run').disabled=running||!list.length;const e=list[0];$('parcel').innerHTML=e?art[e.id]:art.livro;}
+function changeCart(id,delta){if(running)return;let count=volumes().length;if(delta>0&&count>=20){toast('Limite do laboratório: 20 volumes por pedido.');return}cart[id]=Math.max(0,(cart[id]||0)+delta);if(!cart[id])delete cart[id];invalidate();renderCart();}
+function setOp(next){if(running)return;op=next;document.querySelectorAll('[data-op]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.op===op)));$('opdesc').textContent=opInfo[op].desc;$('run').innerHTML=opInfo[op].label+' <span aria-hidden="true">→</span>';$('stationTag').textContent=opInfo[op].name;showResult();updateCode();}
+function updateCode(e,phase=-1){const type=e?.type||'Pacote',name=opInfo[op].name;let lines=[['cm','// A lista mistura Documento, Pacote e Fragil.'],['',`Visitor visitante = new ${name}(destino);`],['',`for (Encomenda item : pedido) {`],['','  item.accept(visitante);'],['','}'],['',''],['cm',`// Dentro de ${type}`],['',`public void accept(Visitor visitante) {`],['',`  visitante.visit${type}(this);`],['','}']];$('code').innerHTML=lines.map(([cl,t],i)=>`<span class="code-line ${phase===0&&i===3||phase===1&&i===8||phase===2&&i===1?'highlight':''}"><span class="${cl}">${esc(t)}</span></span>`).join('');if(e){$('codeTitle').textContent=phase===0?`${e.type} recebe o visitante.`:phase===1?`${name} entra em ação.`:'Resultado recebido.';$('codeText').textContent=phase===0?`O item ${e.serial} (${e.name}) recebe ${name}. A chamada item.accept(visitante) executa o método do tipo concreto ${e.type}.`:phase===1?`Dentro de ${e.type}, this tem esse tipo. A chamada visit${type}(this) chega à implementação de ${name}. Mesma encomenda, comportamento definido pelo visitante.`:`O visitante retornou a saída para ${e.name}. A central guarda o resultado e passa ao próximo volume da mesma lista.`}else{$('codeTitle').textContent='Uma visita, dois despachos.';$('codeText').innerHTML='O pedido guarda diferentes tipos de <strong>Encomenda</strong>. Primeiro, Java escolhe o <code>accept()</code> do objeto concreto. Esse método chama o <code>visitTipo(this)</code>; a implementação vem do visitante recebido.'}}
+function showResult(){const out=outputs[op];$('resultTitle').textContent=opInfo[op].title;$('resultType').textContent=out?'OPERAÇÃO CONCLUÍDA':'SAÍDA DO VISITOR';if(!out){$('result').innerHTML='<div class="result-empty">O resultado aparece aqui.<br>Escolha um visitante e execute a operação.</div>';return}const rows=out.rows;const total=rows.reduce((s,r)=>s+(r.value.cost||0),0);if(op==='frete'){$('result').innerHTML=rows.map(r=>`<div class="receipt-line"><span>${r.e.name} <small>#${r.e.serial}<br>${r.e.internacional?'Internacional':'Nacional'} · ${r.value.days}</small></span><b>${money(r.value.cost)}</b></div>`).join('')+`<div class="receipt-total"><span>Frete total</span><strong>${money(total)}</strong></div><p class="fineprint">Soma dos ${rows.length} volumes, sem consolidação.<br>Tarifas didáticas. Não incluem tributos de importação.</p><button class="download" data-export="frete">↓ Baixar comprovante .txt</button><details style="font-size:10px;margin-top:9px;color:var(--muted)"><summary>Ver regras do cálculo</summary><p style="margin:8px 0">Documento: 8 + 2 × kg.<br>Pacote: 14 + 6 × kg.<br>Frágil: 18 + 8 × kg + 9 de cuidado.<br>Multiplica pelo fator do destino e soma R$ 65 quando os países são diferentes.</p>${rows.map(r=>`<p>${r.e.name}: ${r.value.formula} = ${money(r.value.cost)}</p>`).join('')}</details>`}else if(op==='etiqueta'){$('result').innerHTML=rows.map(r=>`<div class="label-ticket"><span style="font:8px var(--mono)">MISSÃO VISITOR · SEM VALOR POSTAL</span><strong>${r.e.name} → ${esc(r.value.destination)}</strong><span>Origem: ${r.e.origin}<br>${r.value.care}</span><br><span class="result-chip">${r.value.route}</span><div class="barcode" aria-hidden="true"></div><div class="label-code">${r.value.code} · CÓDIGO DIDÁTICO</div></div>`).join('')+'<button class="download" data-print="1">Imprimir etiquetas</button><button class="download" data-export="etiqueta">↓ Baixar etiquetas .txt</button>'}else{let types={};rows.forEach(r=>types[r.e.type]=(types[r.e.type]||0)+1);$('result').innerHTML=`<div class="receipt-line"><span>Volumes</span><b>${rows.length}</b></div><div class="receipt-line"><span>Peso total</span><b>${kg(rows.reduce((s,r)=>s+r.e.weight,0))}</b></div>`+Object.entries(types).map(([t,n])=>`<div class="receipt-line"><span>${t}</span><b>${n}</b></div>`).join('')+rows.map(r=>`<div class="receipt-line"><span><b>#${r.e.serial} · ${r.e.name}</b><br><small>${r.value.origin}<br>${r.value.route} · ${r.value.handling}</small></span><span>${kg(r.e.weight)}</span></div>`).join('')+'<p class="fineprint" style="margin-top:10px">Manifesto gerado por RelatorioVisitor.<br>Os objetos do pedido permanecem os mesmos.</p><button class="download" data-export="relatorio">↓ Baixar relatório .csv</button>'}}
+function locked(on){running=on;document.querySelectorAll('.product,[data-op],#destination,#reset,#speed').forEach(b=>b.disabled=on);$('skip').classList.toggle('visible',on);renderCart();}
+async function delay(ms,token){const end=Date.now()+ms;while(!skip&&Date.now()<end&&token===runToken)await new Promise(r=>setTimeout(r,Math.min(60,end-Date.now())))}
+async function execute(){if(running||!volumes().length)return;const list=volumes(),currentRevision=revision,token=++runToken,chosenOp=op,visitor=new visitors[op](),rows=[];skip=false;locked(true);$('stageStatus').innerHTML='<i class="dot"></i> VISITANTE EM OPERAÇÃO';$('stageStatus').classList.add('running');$('result').innerHTML='<div class="result-empty">Visitando as encomendas…<br>Veja o despacho na central de triagem.</div>';const ms=Number($('speed').value);try{for(const e of list){$('parcel').innerHTML=art[e.id];for(let phase=0;phase<3;phase++){if(token!==runToken)return;$('parcel').className='parcel '+['accept','visit','result'][phase];$('scene').classList.toggle('scanning',phase===1);for(let j=0;j<3;j++)$('step'+j).classList.toggle('active',phase===j);updateCode(e,phase);$('explanation').innerHTML=`<span>✦</span><div><b>Volume ${e.serial}/${list.length} · ${e.name}.</b> ${phase===0?`${e.type}.accept(${opInfo[chosenOp].name}) recebe o visitante.`:phase===1?`O elemento chama visit${e.type}(this) no visitante escolhido.`:'A operação retorna um resultado, sem mudar a encomenda.'}</div>`;if(phase===1){const value=e.accept(visitor);rows.push({e,value})}await delay(ms,token)}}if(revision!==currentRevision)return;outputs[chosenOp]={rows,revision};lastRows=rows;completed.add(chosenOp);missions();showResult();$('result').classList.remove('pop');void $('result').offsetWidth;$('result').classList.add('pop');$('stageStatus').innerHTML='<i class="dot"></i> VISITA CONCLUÍDA';$('explanation').innerHTML=`<span>✓</span><div><b>${opInfo[chosenOp].name}: ${rows.length} volumes visitados.</b> Troque o visitante para executar outra operação no mesmo pedido.${completed.size===4?' Missão cumprida!':''}</div>`;$('announcer').textContent=`${opInfo[chosenOp].name} concluiu a visita a ${rows.length} volumes.`;if(completed.size===4)toast('Missão cumprida! Três operações no mesmo pedido.');}catch(err){toast('Não foi possível concluir a visita. Tente novamente.');console.error(err)}finally{if(token===runToken){$('scene').classList.remove('scanning');$('stageStatus').classList.remove('running');locked(false);$('parcel').className='parcel result'}}}
+function download(name,text,type='text/plain;charset=utf-8'){const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function exportResult(which){const out=outputs[which];if(!out)return;let lines=['MISSÃO VISITOR — SIMULAÇÃO EDUCACIONAL','SEM VALOR POSTAL · VALORES FICTÍCIOS',`Destino: ${destinations[$('destination').value].city}`,''];if(which==='frete'){for(const r of out.rows)lines.push(`#${r.e.serial} ${r.e.name} | ${r.e.origin} | ${r.e.internacional?'Internacional':'Nacional'} | ${money(r.value.cost)} | ${r.value.days}`,`Regra: ${r.value.formula}`);lines.push('',`Total: ${money(out.rows.reduce((s,r)=>s+r.value.cost,0))}`);download('missao-visitor-frete.txt',lines.join('\n'))}else if(which==='etiqueta'){for(const r of out.rows)lines.push(`${r.value.code} | ${r.e.name}`,`Origem: ${r.e.origin}`,`Destino: ${r.value.destination}`,`${r.value.route} | ${r.value.care}`,'---');download('missao-visitor-etiquetas.txt',lines.join('\n'))}else{const csv=v=>'"'+String(v).replace(/"/g,'""')+'"';const table=[['Volume','Produto','Tipo','Peso (kg)','Origem','Destino','Rota','Manuseio'],...out.rows.map(r=>[r.e.serial,r.e.name,r.e.type,String(r.e.weight).replace('.',','),r.e.origin,destinations[$('destination').value].city,r.value.route,r.value.handling])];download('missao-visitor-relatorio.csv','\ufeff'+table.map(r=>r.map(csv).join(';')).join('\r\n'),'text/csv;charset=utf-8')}}
+function compare(mode){document.querySelectorAll('[data-compare]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.compare===mode)));$('comparison').innerHTML=mode==='traditional'?`<article class="compare-card"><span class="tag">01 / LÓGICA DENTRO DOS ELEMENTOS</span><h3>A encomenda faz tudo.</h3><p>Documento, Pacote e Fragil carregam métodos de frete, etiqueta e relatório. Cada nova operação exige editar essas classes.</p><pre>pacote.calcularFrete(destino);\npacote.gerarEtiqueta(destino);\npacote.gerarRelatorio(destino);</pre><div class="tradeoff">Simples no início. Mais responsabilidades em cada elemento.</div></article><article class="compare-card accent"><span class="tag">02 / OPERAÇÕES EM VISITANTES</span><h3>A encomenda recebe uma visita.</h3><p>Cada operação vive em um visitante. Uma nova operação pede um novo visitante, preservando os elementos que já oferecem accept().</p><pre>pacote.accept(new FreteVisitor(destino));\npacote.accept(new EtiquetaVisitor(destino));\npacote.accept(new RelatorioVisitor(destino));</pre><div class="tradeoff">Ótimo para tipos estáveis. Novos tipos exigem atualizar os visitantes.</div></article>`:`<article class="compare-card accent"><span class="tag">VISITOR / OPERAÇÕES × TIPOS</span><h3>“O que fazer com cada encomenda?”</h3><p>FreteVisitor, EtiquetaVisitor e RelatorioVisitor percorrem Documento, Pacote e Fragil. Cada visitante trata cada tipo com uma implementação específica.</p><pre>for (Encomenda item : pedido) {\n  item.accept(new FreteVisitor(destino));\n}</pre><div class="tradeoff">Double Dispatch: tipo concreto do elemento + visitante concreto.</div></article><article class="compare-card"><span class="tag">STRATEGY / ALGORITMOS INTERCAMBIÁVEIS</span><h3>“Como calcular este frete?”</h3><p>O contexto troca o algoritmo de uma tarefa: econômico ou expresso. Strategy não exige uma visita por tipo; pode inclusive ser usado dentro de FreteVisitor.</p><pre>Calculadora c = new Calculadora(\n  new FreteExpresso(), destino\n);\nc.calcular(pedido);</pre><div class="tradeoff">Visitor e Strategy podem coexistir; resolvem variações diferentes.</div></article>`}
+document.querySelector('#catalog').innerHTML=products.map(p=>`<button class="product" data-product="${p.id}" aria-label="Adicionar ${p.name}, ${p.type}, origem ${p.origin}"><span class="add" aria-hidden="true">+</span><span class="art">${art[p.id]}</span><strong>${p.name}</strong><small>${p.type} · ${kg(p.weight)}</small><span class="origin">${p.origin.toUpperCase()}</span></button>`).join('');
+$('catalog').addEventListener('click',ev=>{const b=ev.target.closest('[data-product]');if(b)changeCart(b.dataset.product,1)});
+$('cart').addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b)return;if(b.dataset.add)changeCart(b.dataset.add,1);if(b.dataset.remove)changeCart(b.dataset.remove,-1)});
+$('optabs').addEventListener('click',ev=>{const b=ev.target.closest('[data-op]');if(b)setOp(b.dataset.op)});
+document.querySelectorAll('[data-compare]').forEach(b=>b.addEventListener('click',()=>compare(b.dataset.compare)));
+$('run').addEventListener('click',execute);$('skip').addEventListener('click',()=>{skip=true});
+$('destination').addEventListener('change',()=>{invalidate();renderCart()});
+$('reset').addEventListener('click',()=>{if(running)return;cart={livro:1,caneca:1};$('destination').value='fortaleza';invalidate();renderCart();setOp('frete');$('stageStatus').innerHTML='<i class="dot"></i> AGUARDANDO VISITANTE';for(let j=0;j<3;j++)$('step'+j).classList.remove('active');toast('Central reiniciada com um pedido de exemplo.');});
+$('manifest').addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b)return;if(b.dataset.export)exportResult(b.dataset.export);if(b.dataset.print)window.print()});
+$('help').addEventListener('click',()=>$('helpDialog').showModal());$('closeHelp').addEventListener('click',()=>$('helpDialog').close());
+$('downloadJava').addEventListener('click',()=>download('CentralPostal.java',$('javaSource').textContent));
+invalidate();renderCart();setOp('frete');compare('traditional');$('explanation').innerHTML='<span>✦</span><div><b>Um livro e uma caneca chegaram.</b> Execute o exemplo ou adicione outros produtos. Depois troque o visitante sem alterar o pedido.</div>';
+</script><script type="text/plain" id="javaSource">import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+/**
+ * Missao Visitor: exemplo didatico, sem integracao com os Correios.
+ * Java 17+: javac -encoding UTF-8 CentralPostal.java && java CentralPostal
+ * Cada unidade e um volume independente. Tarifas ficticias, sem impostos.
+ */
+public class CentralPostal {
+    record Destino(String cidade, String pais, double fator) {}
+
+    interface Visitor {
+        void visitDocumento(Documento item);
+        void visitPacote(Pacote item);
+        void visitFragil(Fragil item);
+    }
+
+    abstract static class Encomenda {
+        final String nome;
+        final double peso;
+        final String origem;
+        final String pais;
+
+        Encomenda(String nome, double peso, String origem, String pais) {
+            if (peso <= 0) throw new IllegalArgumentException("Peso deve ser positivo");
+            this.nome = nome;
+            this.peso = peso;
+            this.origem = origem;
+            this.pais = pais;
+        }
+
+        boolean internacional(Destino destino) {
+            return !pais.equals(destino.pais());
+        }
+
+        abstract void accept(Visitor visitante);
+    }
+
+    static final class Documento extends Encomenda {
+        Documento(String nome, double peso, String origem, String pais) {
+            super(nome, peso, origem, pais);
+        }
+
+        @Override public void accept(Visitor visitante) {
+            visitante.visitDocumento(this);
+        }
+    }
+
+    static final class Pacote extends Encomenda {
+        Pacote(String nome, double peso, String origem, String pais) {
+            super(nome, peso, origem, pais);
+        }
+
+        @Override public void accept(Visitor visitante) {
+            visitante.visitPacote(this);
+        }
+    }
+
+    static final class Fragil extends Encomenda {
+        Fragil(String nome, double peso, String origem, String pais) {
+            super(nome, peso, origem, pais);
+        }
+
+        @Override public void accept(Visitor visitante) {
+            visitante.visitFragil(this);
+        }
+    }
+
+    record Cotacao(String produto, long centavos, String prazo) {}
+
+    static final class FreteVisitor implements Visitor {
+        final Destino destino;
+        final List<Cotacao> cotacoes = new ArrayList<>();
+
+        FreteVisitor(Destino destino) { this.destino = destino; }
+
+        private void calcular(Encomenda e, double base, double porKg, double cuidado) {
+            double valor = (base + e.peso * porKg + cuidado) * destino.fator()
+                    + (e.internacional(destino) ? 65 : 0);
+            String prazo = e.internacional(destino) ? "12-20 dias uteis" : "3-7 dias uteis";
+            cotacoes.add(new Cotacao(e.nome, Math.round(valor * 100), prazo));
+        }
+
+        @Override public void visitDocumento(Documento e) { calcular(e, 8, 2, 0); }
+        @Override public void visitPacote(Pacote e) { calcular(e, 14, 6, 0); }
+        @Override public void visitFragil(Fragil e) { calcular(e, 18, 8, 9); }
+
+        long totalCentavos() { return cotacoes.stream().mapToLong(Cotacao::centavos).sum(); }
+    }
+
+    record Etiqueta(String codigo, String produto, String origem, String destino,
+                    String rota, String cuidado) {}
+
+    static final class EtiquetaVisitor implements Visitor {
+        final Destino destino;
+        final List<Etiqueta> etiquetas = new ArrayList<>();
+
+        EtiquetaVisitor(Destino destino) { this.destino = destino; }
+
+        private void gerar(Encomenda e, String cuidado) {
+            String codigo = "MV-001-%03d".formatted(etiquetas.size() + 1);
+            etiquetas.add(new Etiqueta(codigo, e.nome, e.origem, destino.cidade(),
+                    e.internacional(destino) ? "INTERNACIONAL" : "NACIONAL", cuidado));
+        }
+
+        @Override public void visitDocumento(Documento e) { gerar(e, "NAO DOBRAR"); }
+        @Override public void visitPacote(Pacote e) { gerar(e, "VOLUME PADRAO"); }
+        @Override public void visitFragil(Fragil e) { gerar(e, "FRAGIL - MANUSEAR COM CUIDADO"); }
+    }
+
+    record LinhaRelatorio(String nome, String tipo, double peso, String origem,
+                          String rota, String manuseio) {}
+
+    static final class RelatorioVisitor implements Visitor {
+        final Destino destino;
+        final List<LinhaRelatorio> linhas = new ArrayList<>();
+
+        RelatorioVisitor(Destino destino) { this.destino = destino; }
+
+        private void registrar(Encomenda e, String tipo, String manuseio) {
+            linhas.add(new LinhaRelatorio(e.nome, tipo, e.peso, e.origem,
+                    e.internacional(destino) ? "Internacional" : "Nacional", manuseio));
+        }
+
+        @Override public void visitDocumento(Documento e) {
+            registrar(e, "Documento", "Envelope rigido");
+        }
+        @Override public void visitPacote(Pacote e) {
+            registrar(e, "Pacote", "Embalagem padrao");
+        }
+        @Override public void visitFragil(Fragil e) {
+            registrar(e, "Fragil", "Protecao reforcada");
+        }
+    }
+
+    // O cliente apenas percorre os elementos: nao precisa de instanceof.
+    static void visitar(List<Encomenda> pedido, Visitor visitante) {
+        for (Encomenda item : pedido) {
+            item.accept(visitante);
+        }
+    }
+
+    // Strategy e opcional: troca o algoritmo de UMA tarefa.
+    interface EstrategiaFrete { long calcular(List<Encomenda> pedido, Destino destino); }
+
+    static final class FreteEconomico implements EstrategiaFrete {
+        @Override public long calcular(List<Encomenda> pedido, Destino destino) {
+            FreteVisitor frete = new FreteVisitor(destino);
+            visitar(pedido, frete);
+            return frete.totalCentavos();
+        }
+    }
+
+    static final class FreteExpresso implements EstrategiaFrete {
+        @Override public long calcular(List<Encomenda> pedido, Destino destino) {
+            return Math.round(new FreteEconomico().calcular(pedido, destino) * 1.5);
+        }
+    }
+
+    static final class Calculadora {
+        private EstrategiaFrete estrategia;
+        final Destino destino;
+
+        Calculadora(EstrategiaFrete estrategia, Destino destino) {
+            this.estrategia = estrategia;
+            this.destino = destino;
+        }
+
+        void setEstrategia(EstrategiaFrete estrategia) { this.estrategia = estrategia; }
+        long calcular(List<Encomenda> pedido) { return estrategia.calcular(pedido, destino); }
+    }
+
+    public static void main(String[] args) {
+        Locale.setDefault(Locale.forLanguageTag("pt-BR"));
+        Destino destino = new Destino("Fortaleza", "BR", 1.0);
+        List<Encomenda> pedido = List.of(
+                new Pacote("Livro", 0.6, "Sao Paulo - BR", "BR"),
+                new Fragil("Caneca", 0.4, "Curitiba - BR", "BR"),
+                new Documento("Documentos", 0.05, "Fortaleza - BR", "BR"),
+                new Fragil("Camera", 0.8, "Toquio - JP", "JP")
+        );
+
+        FreteVisitor frete = new FreteVisitor(destino);
+        EtiquetaVisitor etiqueta = new EtiquetaVisitor(destino);
+        RelatorioVisitor relatorio = new RelatorioVisitor(destino);
+        visitar(pedido, frete);
+        visitar(pedido, etiqueta);
+        visitar(pedido, relatorio);
+
+        System.out.println("FRETE (SIMULACAO)");
+        frete.cotacoes.forEach(c -> System.out.printf("%s: R$ %.2f | %s%n",
+                c.produto(), c.centavos() / 100.0, c.prazo()));
+        System.out.printf("Total: R$ %.2f%n%n", frete.totalCentavos() / 100.0);
+        System.out.println("ETIQUETAS - SEM VALOR POSTAL");
+        etiqueta.etiquetas.forEach(System.out::println);
+        System.out.println("\nRELATORIO");
+        relatorio.linhas.forEach(System.out::println);
+
+        // As estrategias reutilizam o Visitor: os padroes podem coexistir.
+        Calculadora calculadora = new Calculadora(new FreteEconomico(), destino);
+        System.out.printf("%nStrategy economico: R$ %.2f%n", calculadora.calcular(pedido) / 100.0);
+        calculadora.setEstrategia(new FreteExpresso());
+        System.out.printf("Strategy expresso: R$ %.2f%n", calculadora.calcular(pedido) / 100.0);
+    }
+}
+</script></body></html>
